@@ -65,8 +65,7 @@ sudo mount --bind /dev rootfs/dev
 sudo mount --bind /run rootfs/run
 sudo mount -t proc /proc rootfs/proc
 sudo mount -t sysfs /sys rootfs/sys
-
-sudo cp /etc/resolv.conf 
+ 
 ```
 
 ## Chroot:
@@ -153,7 +152,7 @@ apt install -y \
 apt install -y firefox-esr
 ```
 
-## Установка современного Golang
+## Установка Golang
 ```bash
 
 cd /tmp
@@ -183,22 +182,16 @@ sudo systemctl stop apt-daily.timer
 sudo systemctl stop apt-daily-upgrade.timer
 
 sudo apt remove -y update-notifier
-```
 
-```bash
-
-sudo nano /etc/apt/apt.conf.d/99-no-updates
-```
-
-добавить туда этот текст:
-
-```bash
+cat >> /etc/apt/apt.conf.d/99-no-updates <<EOF
 
 APT::Periodic::Enable "0";
 APT::Periodic::Update-Package-Lists "0";
 APT::Periodic::Download-Upgradeable-Packages "0";
 APT::Periodic::AutocleanInterval "0";
 APT::Periodic::Unattended-Upgrade "0";
+
+EOF
 ```
 
 ## Настройка autologin:
@@ -216,7 +209,6 @@ EOF
 cat >> /home/dev/.bashrc <<EOF
 
 alias ll='ls -lah'
-alias gs='git status'
 
 export GOPATH=\$HOME/go
 export PATH=\$PATH:/usr/local/go/bin:\$GOPATH/bin
@@ -307,6 +299,7 @@ sudo gdisk /dev/sdb
 ```
 
 Создать разделы:
+
 `sdb1 EFI: 512MB, type EF00`
 
 `sdb2 LIVE: 6GB, type 8300`
@@ -362,7 +355,6 @@ menuentry "Ubuntu Live Dev" {
 }
 
 EOF
-
 
 sudo umount /mnt/boot/efi
 sudo umount /mnt
