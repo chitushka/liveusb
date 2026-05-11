@@ -21,15 +21,11 @@ sudo apt install -y \
     xorriso \
     grub-pc-bin \
     grub-efi-amd64-bin \
-    mtools \
     dosfstools \
     gdisk \
     cryptsetup \
     rsync \
-    xfsprogs \
-    squashfs-tools \
-    live-boot \
-    live-config
+    mtools
 ```
 
 ## Подготовка workspace:
@@ -50,7 +46,7 @@ mkdir mnt
 
 sudo debootstrap \
   --arch=amd64 \
-  noble \
+  bionic \
   rootfs \
   http://archive.ubuntu.com/ubuntu
 ```
@@ -76,13 +72,17 @@ sudo chroot rootfs
 
 Теперь ты внутри будущей Live OS.
 
+```bash
+sudo cp /etc/resolv.conf rootfs/etc/
+```
+
 ## Настройка repositories:
 ```bash
 
 cat > /etc/apt/sources.list <<EOF
-deb http://archive.ubuntu.com/ubuntu noble main restricted universe multiverse
-deb http://archive.ubuntu.com/ubuntu noble-updates main restricted universe multiverse
-deb http://security.ubuntu.com/ubuntu noble-security main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu bionic main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu bionic-updates main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu bionic-security main restricted universe multiverse
 EOF
 
 apt update
@@ -94,10 +94,8 @@ apt update
 apt install -y \
     linux-image-generic \
     linux-firmware \
-    systemd-sysv \
     casper \
-    live-boot \
-    live-config \
+    systemd-sysv \
     network-manager
 ```
 
@@ -149,11 +147,7 @@ apt install -y \
     php-xml \
     composer
 
-apt install -y firefox-esr
-```
-
-## Установка Golang
-```bash
+apt install -y firefox
 
 cd /tmp
 
