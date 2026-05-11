@@ -45,6 +45,7 @@ mkdir mnt
 ```bash
 
 sudo debootstrap \
+  --variant=minbase \
   --arch=amd64 \
   bionic \
   rootfs \
@@ -53,6 +54,10 @@ sudo debootstrap \
 
 В rootfs/ теперь полноценная минимальная Ubuntu.
 
+```bash
+
+sudo cp /etc/resolv.conf rootfs/etc/
+```
 
 ## Mount pseudo filesystems:
 ```bash
@@ -71,10 +76,6 @@ sudo chroot rootfs
 ```
 
 Теперь ты внутри будущей Live OS.
-
-```bash
-sudo cp /etc/resolv.conf rootfs/etc/
-```
 
 ## Настройка repositories:
 ```bash
@@ -111,7 +112,9 @@ apt install -y \
     pavucontrol \
     gvfs \
     gvfs-backends \
-    file-roller
+    file-roller \
+    network-manager-gnome
+
 ```
 
 Base tools:
@@ -212,6 +215,17 @@ export COMPOSER_CACHE_DIR=/tmp/composer-cache
 EOF
 
 chown dev:dev /home/dev/.bashrc
+
+cat > /home/dev/instructions.txt <<EOF
+WiFi list:
+nmcli device wifi list
+
+WiFi connect:
+nmcli device wifi connect "SSID" password "PASSWORD"
+
+
+EOF
+
 ```
 
 ## Flash optimizations:
