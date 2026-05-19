@@ -4,7 +4,7 @@
 /dev/sdb
 
 ├── sdb1  EFI FAT32           512MB
-├── sdb2  LIVE SYSTEM         3GB
+├── sdb2  LIVE SYSTEM         4GB
 └── sdb3  LUKS2 PERSISTENCE   остальное
 ```
 
@@ -327,7 +327,7 @@ sudo gdisk /dev/sdb
 
 `sdb1 EFI: 512MB, type EF00`
 
-`sdb2 LIVE: 3GB, type 8300`
+`sdb2 LIVE: 4GB, type 8300`
 
 `sdb3 PERSISTENCE: remaining space, type 8300`
 
