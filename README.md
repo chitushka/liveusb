@@ -146,7 +146,18 @@ apt install -y \
     php-cli \
     php-curl \
     php-mbstring \
+    php-json \
+    php-soap \
+    php-pgsql \
+    php-mysql \
+    php-odbc \
+    php-intl \
+    php-gd \
     php-xml \
+    php-xmlrpc \
+    php-zip \
+    php-ldap \
+    php-bcmath \
     composer
 
 ```
@@ -163,6 +174,9 @@ tar -C /usr/local -xzf go1.25.10.linux-amd64.tar.gz
 useradd -m -s /bin/bash chitu
 passwd chitu
 
+```
+
+```bash
 usermod -aG sudo chitu
 
 ```
@@ -208,7 +222,7 @@ EOF
 ```
 
 ```bash
-cat >> /home/dev/.bashrc <<EOF
+cat >> /home/chitu/.bashrc <<EOF
 
 alias ll='ls -lah'
 
