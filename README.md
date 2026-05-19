@@ -349,16 +349,50 @@ sudo gdisk /dev/sdb
 ## Форматирование:
 ```bash
 sudo mkfs.vfat -F32 /dev/sdb1
+
+```
+
+```bash
 sudo mkfs.ext4 /dev/sdb2
+
+```
+
+```bash
 sudo cryptsetup luksFormat --type luks2 /dev/sdb3
+
+```
+
+```bash
 sudo cryptsetup open /dev/sdb3 persistence
+
+```
+
+```bash
 sudo mkfs.ext4 /dev/mapper/persistence
+
+```
+
+```bash
 sudo e2label /dev/mapper/persistence writable
+
+```
+
+```bash
 sudo mount /dev/mapper/persistence /mnt
 
+```
+
+```bash
 echo "/home" | sudo tee /mnt/persistence.conf
 
+```
+
+```bash
 sudo umount /mnt
+
+```
+
+```bash
 sudo cryptsetup close persistence
 
 ```
@@ -371,7 +405,15 @@ sudo mount /dev/sdb2 /mnt
 ```bash
 sudo mkdir -p /mnt/casper
 sudo cp iso/filesystem.squashfs /mnt/casper/
+
+```
+
+```bash
 sudo cp rootfs/boot/vmlinuz-* /mnt/vmlinuz
+
+```
+
+```bash
 sudo cp rootfs/boot/initrd.img-* /mnt/initrd
 
 ```
